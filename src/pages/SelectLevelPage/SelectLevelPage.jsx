@@ -36,6 +36,11 @@ export function SelectLevelPage() {
           />
           <label htmlFor="easyMode">Легкий режим (3 попытки)</label>
         </div>
+        <div className={styles.leaderboardLinkBox}>
+          <Link to={`/leaderboard`} className={styles.leaderboardLink}>
+            Перейти к лидерборду
+          </Link>
+        </div>
       </div>
     </div>
   );
