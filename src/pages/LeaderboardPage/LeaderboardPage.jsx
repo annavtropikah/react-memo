@@ -8,6 +8,7 @@ import NoAchiv1 from "../../assets/icons/NoAchiv1.svg";
 import GetAchiv1 from "../../assets/icons/GetAchiv1.svg";
 import NoAchiv2 from "../../assets/icons/NoAchiv2.svg";
 import GetAchiv2 from "../../assets/icons/GetAchiv2.svg";
+import ToolTipComponent from "../../components/ToolTip/ToolTipComponent";
 
 export function LeaderboardPage() {
   const [leaders, setLeaders] = useState([]);
@@ -43,16 +44,20 @@ export function LeaderboardPage() {
             console.log(leader);
             return (
               <li className={styles.leadersItem} key={leader.id}>
-                <div># {i++}</div>
-                <div>{leader.name}</div>
-                <div>
-                  {leader.achievements[0] ? (
-                    <img className={styles.iconBtn} src={GetAchiv1} alt="Игра пройдена в сложном режиме" />
+                <div className={styles.numberBox}># {i++}</div>
+                <div className={styles.nameBox}>{leader.name}</div>
+                <div className={styles.achivBox}>
+                  {leader.achievements.includes(1) ? (
+                    <ToolTipComponent text={"Игра пройдена в сложном режиме"} customClass={styles.toolTipCustom}>
+                      <img className={styles.iconBtn} src={GetAchiv1} alt="Игра пройдена в сложном режиме" />
+                    </ToolTipComponent>
                   ) : (
                     <img className={styles.iconBtn} src={NoAchiv1} alt="Легкий режим использовался" />
                   )}
-                  {leader.achievements[1] ? (
-                    <img className={styles.iconBtn} src={GetAchiv2} alt="Игра пройдена без супер-сил" />
+                  {leader.achievements.includes(2) ? (
+                    <ToolTipComponent text={"Игра пройдена без супер-сил"} customClass={styles.toolTipCustom}>
+                      <img className={styles.iconBtn} src={GetAchiv2} alt="Игра пройдена без супер-сил" />
+                    </ToolTipComponent>
                   ) : (
                     <img className={styles.iconBtn} src={NoAchiv2} alt="Суперсилы использовались" />
                   )}

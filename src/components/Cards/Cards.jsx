@@ -6,6 +6,7 @@ import { EndGameModal } from "../../components/EndGameModal/EndGameModal";
 import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
 import CardsIcon from "../../assets/icons/cards.svg";
+import ToolTipComponent from "../ToolTip/ToolTipComponent";
 
 // Игра закончилась
 const STATUS_LOST = "STATUS_LOST";
@@ -247,7 +248,9 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
             {isGameMode === "true" ? (
               <div className={styles.attemptСounter}>осталось попыток: {numberOfAttempts + 1} </div>
             ) : null}
-            <img className={styles.iconBtn} src={CardsIcon} alt="Открыть пару карточек" onClick={alohomora} />
+            <ToolTipComponent text={"Алохомора! Открывается случайная пара карт."} customClass={styles.toolTipCustom}>
+              <img className={styles.iconBtn} src={CardsIcon} alt="Открыть пару карточек" onClick={alohomora} />
+            </ToolTipComponent>
             <Button onClick={resetGame}>Начать заново</Button>
           </>
         ) : null}
