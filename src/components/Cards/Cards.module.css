@@ -85,3 +85,7 @@
   font-weight: 400;
   line-height: 30px;
 }
+
+.iconBtn:hover {
+  cursor: pointer;
+}

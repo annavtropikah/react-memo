@@ -5,6 +5,7 @@ import styles from "./Cards.module.css";
 import { EndGameModal } from "../../components/EndGameModal/EndGameModal";
 import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
+import CardsIcon from "../../assets/icons/cards.svg";
 
 // Игра закончилась
 const STATUS_LOST = "STATUS_LOST";
@@ -59,6 +60,9 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
 
   // Стейт для счетчика попыток
   const [numberOfAttempts, setNumberOfAttempts] = useState(2);
+
+  const [achievements, setAchievements] = useState([]);
+
   const minusOneAttempt = () => {
     setNumberOfAttempts(numberOfAttempts - 1);
   };
@@ -80,6 +84,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
     setTimer(getTimerValue(null, null));
     setStatus(STATUS_PREVIEW);
     setNumberOfAttempts(2);
+    setAchievements(prevState => prevState.filter(achieve => achieve !== 2));
   }
 
   /**
@@ -161,6 +166,23 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
 
   const isGameEnded = status === STATUS_LOST || status === STATUS_WON;
 
+  const alohomora = () => {
+    if (achievements.includes(2)) {
+      alert("Подсказкой можно воспользоваться только 1 раз");
+      return;
+    }
+
+    let closedCards = cards.filter(card => !card.open);
+    closedCards = shuffle(closedCards);
+    closedCards[0].open = true;
+    closedCards.forEach(card => {
+      if (card.suit === closedCards[0].suit && card.rank === closedCards[0].rank) {
+        card.open = true;
+      }
+    });
+    setAchievements(prevState => [...prevState, 2]);
+  };
+
   // Игровой цикл
   useEffect(() => {
     // В статусах кроме превью доп логики не требуется
@@ -197,6 +219,12 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
     };
   }, [gameStartDate, gameEndDate]);
 
+  useEffect(() => {
+    if (!isGameMode) {
+      setAchievements(prevState => [...prevState, 1]);
+    }
+  }, [isGameMode]);
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -225,6 +253,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
             {isGameMode === "true" ? (
               <div className={styles.attemptСounter}>осталось попыток: {numberOfAttempts + 1} </div>
             ) : null}
+            <img className={styles.iconBtn} src={CardsIcon} alt="Открыть пару карточек" onClick={alohomora} />
             <Button onClick={resetGame}>Начать заново</Button>
           </>
         ) : null}
