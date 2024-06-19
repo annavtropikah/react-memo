@@ -17,8 +17,11 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
   const [userData, setuserData] = useState({
     name: "",
     time: gameSeconds,
+    achievements: [],
   });
+  //если isGameMode true то в userData.achievements нужно добавить 1
 
+  console.log(isGameMode);
   const handleInputChange = e => {
     const { name, value } = e.target; // Извлекаем имя поля и его значение
 
@@ -68,7 +71,7 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
     <div className={styles.modal}>
       <img className={styles.image} src={imgSrc} alt={imgAlt} />
       <h2 className={styles.title}>{title}</h2>
-      {isGameMode === "false" && pairsCount === "9" && isWon ? (
+      {pairsCount === "9" && isWon ? (
         <form className={styles.form}>
           <input
             className={styles.nameInput}
@@ -85,7 +88,7 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
       <div className={styles.time}>
         {gameDurationMinutes.toString().padStart("2", "0")}.{gameDurationSeconds.toString().padStart("2", "0")}
       </div>
-      {isGameMode === "false" && pairsCount === "9" && isWon ? (
+      {pairsCount === "9" && isWon ? (
         <>
           <Button onClick={handleAddUserButton}>Начать сначала</Button>
           <div onClick={handleAddUser} className={styles.leaderboardLink}>

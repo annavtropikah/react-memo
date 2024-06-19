@@ -137,12 +137,6 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
 
     const playerLost = openCardsWithoutPair.length >= 2;
 
-    // // "Игрок проиграл", т.к на поле есть две открытые карты без пары
-    // if (playerLost) {
-    //   finishGame(STATUS_LOST);
-    //   return;
-    // }
-
     // ... игра продолжается
     if (isGameMode === "true") {
       if (playerLost) {
@@ -278,6 +272,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
             gameDurationSeconds={timer.seconds}
             gameDurationMinutes={timer.minutes}
             onClick={resetGame}
+            isGameMode={isGameMode}
           />
         </div>
       ) : null}

@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 import { Button } from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { getLeaders } from "../../api";
+import NoAchiv1 from "../../assets/icons/NoAchiv1.svg";
+import GetAchiv1 from "../../assets/icons/GetAchiv1.svg";
+import NoAchiv2 from "../../assets/icons/NoAchiv2.svg";
+import GetAchiv2 from "../../assets/icons/GetAchiv2.svg";
 
 export function LeaderboardPage() {
   const [leaders, setLeaders] = useState([]);
@@ -19,6 +23,7 @@ export function LeaderboardPage() {
   };
 
   let i = 1;
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -29,6 +34,7 @@ export function LeaderboardPage() {
         <div className={styles.leadersItemTitle}>
           <div>Позиция</div>
           <div>Пользователь</div>
+          <div>Достижения</div>
           <div>Время</div>
         </div>
         {leaders
@@ -39,6 +45,18 @@ export function LeaderboardPage() {
               <li className={styles.leadersItem} key={leader.id}>
                 <div># {i++}</div>
                 <div>{leader.name}</div>
+                <div>
+                  {leader.achievements[0] ? (
+                    <img className={styles.iconBtn} src={GetAchiv1} alt="Игра пройдена в сложном режиме" />
+                  ) : (
+                    <img className={styles.iconBtn} src={NoAchiv1} alt="Легкий режим использовался" />
+                  )}
+                  {leader.achievements[1] ? (
+                    <img className={styles.iconBtn} src={GetAchiv2} alt="Игра пройдена без супер-сил" />
+                  ) : (
+                    <img className={styles.iconBtn} src={NoAchiv2} alt="Суперсилы использовались" />
+                  )}
+                </div>
                 <div>
                   {Math.trunc(leader.time / 60)
                     .toString()
