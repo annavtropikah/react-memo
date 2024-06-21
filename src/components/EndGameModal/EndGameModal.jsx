@@ -8,8 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { addLeaders } from "../../api";
 
-export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, onClick }) {
-  const { isGameMode } = useParams();
+export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, onClick, achievements }) {
   const { pairsCount } = useParams();
 
   const navigate = useNavigate();
@@ -17,11 +16,9 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
   const [userData, setuserData] = useState({
     name: "",
     time: gameSeconds,
-    achievements: [],
+    achievements,
   });
-  //если isGameMode true то в userData.achievements нужно добавить 1
 
-  console.log(isGameMode);
   const handleInputChange = e => {
     const { name, value } = e.target; // Извлекаем имя поля и его значение
 
