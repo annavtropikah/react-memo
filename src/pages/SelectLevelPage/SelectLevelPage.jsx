@@ -26,8 +26,20 @@ export function SelectLevelPage() {
           </li>
         </ul>
         <div className={styles.easyMode}>
-          <input type="checkbox" checked={checked} onChange={() => setChecked(!checked)} id="easyMode" />
-          <label htmlFor="easyMode">Легкий режим</label>
+          <input
+            className={styles.custom}
+            type="checkbox"
+            checked={checked}
+            value="yes"
+            onChange={() => setChecked(!checked)}
+            id="easyMode"
+          />
+          <label htmlFor="easyMode">Легкий режим (3 попытки)</label>
+        </div>
+        <div className={styles.leaderboardLinkBox}>
+          <Link to={`/leaderboard`} className={styles.leaderboardLink}>
+            Перейти к лидерборду
+          </Link>
         </div>
       </div>
     </div>
