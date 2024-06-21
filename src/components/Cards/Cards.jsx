@@ -42,7 +42,7 @@ function getTimerValue(startDate, endDate) {
  * pairsCount - сколько пар будет в игре
  * previewSeconds - сколько секунд пользователь будет видеть все карты открытыми до начала игры
  */
-export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
+export function Cards({ pairsCount = 3, previewSeconds = 5, isEasyMode }) {
   // В cards лежит игровое поле - массив карт и их состояние открыта\закрыта
   const [cards, setCards] = useState([]);
   // Текущий статус игры
@@ -139,7 +139,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
     const playerLost = openCardsWithoutPair.length >= 2;
 
     // ... игра продолжается
-    if (isGameMode === "true") {
+    if (isEasyMode === "true") {
       if (playerLost) {
         minusOneAttempt();
         if (numberOfAttempts < 1) {
@@ -215,10 +215,15 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
   }, [gameStartDate, gameEndDate]);
 
   useEffect(() => {
-    if (!isGameMode) {
-      setAchievements(prevState => [...prevState, 1]);
+    if (isEasyMode === "true") {
+      setAchievements(prevState => {
+        if (prevState.includes(1)) {
+          return prevState;
+        }
+        return [...prevState, 1];
+      });
     }
-  }, [isGameMode]);
+  }, [isEasyMode]);
 
   return (
     <div className={styles.container}>
@@ -245,8 +250,8 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
         </div>
         {status === STATUS_IN_PROGRESS ? (
           <>
-            {isGameMode === "true" ? (
-              <div className={styles.attemptСounter}>осталось попыток: {numberOfAttempts + 1} </div>
+            {isEasyMode === "true" ? (
+              <div className={styles.attemptСounter}>Осталось попыток: {numberOfAttempts + 1} </div>
             ) : null}
             <ToolTipComponent text={"Алохомора! Открывается случайная пара карт."} customClass={styles.toolTipCustom}>
               <img className={styles.iconBtn} src={CardsIcon} alt="Открыть пару карточек" onClick={alohomora} />
@@ -275,7 +280,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
             gameDurationSeconds={timer.seconds}
             gameDurationMinutes={timer.minutes}
             onClick={resetGame}
-            isGameMode={isGameMode}
+            achievements={achievements}
           />
         </div>
       ) : null}
