@@ -62,3 +62,38 @@
 .levelLink:visited {
   color: #0080c1;
 }
+
+
+.easyMode {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  width: 300px;
+  font-family: StratosSkyeng;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  
+}
+
+label:hover,
+input[type="checkbox"]:focus + label {
+  background-color: #f3f3f3;
+  cursor: pointer;
+}
+
+label {
+  display: block;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+input[type="checkbox"]:checked + label {
+  background-color: #e9e9e9;
+  border-color: #adb8c0;
+ 
+}
