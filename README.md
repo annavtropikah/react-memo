@@ -2,9 +2,6 @@
 
 В этом репозитории реализован MVP карточкой игры "Мемо" по [тех.заданию](./docs/mvp-spec.md)
 
-Проект задеплоен на gh pages:
-https://skypro-web-developer.github.io/react-memo/
-
 ## Разработка
 
 Проект реализован на основе шаблона [Create React App](https://github.com/facebook/create-react-app).
@@ -44,9 +41,6 @@ https://skypro-web-developer.github.io/react-memo/
 
 Запускает eslint проверку кода, эта же команда запускается перед каждым коммитом.
 Если не получается закоммитить, попробуйте запустить эту команду и исправить все ошибки и предупреждения.
-
-
-
 
 
 
